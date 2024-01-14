@@ -12,10 +12,12 @@ function App() {
   return (
     <div className="space-y-24">
       <NavBar />
-      <Routes>
-        <Route path="/" Component={HomePage} />
-        <Route path="/editor" Component={EditorPage} />
-      </Routes>
+      <div className="container">
+        <Routes>
+          <Route path="/" Component={HomePage} />
+          <Route path="/editor" Component={EditorPage} />
+        </Routes>
+      </div>
       <Footer />
     </div>
   );
