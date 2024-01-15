@@ -17,7 +17,7 @@ export const EditorControls = () => {
   const [editorValue] = useAtom(editorValueAtom);
   const [, setOutputValue] = useAtom(outputValueAtom);
   const [selectedLanguage] = useAtom(selectedLanguageAtom);
-  const [, setIsExecutingCode] = useAtom(isExecutingCodeAtom);
+  const [isExecutingCode, setIsExecutingCode] = useAtom(isExecutingCodeAtom);
 
   const executeCode = async () => {
     setIsExecutingCode(true);
@@ -34,7 +34,11 @@ export const EditorControls = () => {
   return (
     <>
       <LanguageSelector />
-      <Button className="space-x-1" onClick={executeCode}>
+      <Button
+        className="space-x-1"
+        onClick={executeCode}
+        disabled={isExecutingCode}
+      >
         <PlayIcon width={16} height={16} />
         <div>
           Run
