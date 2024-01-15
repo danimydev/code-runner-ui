@@ -20,7 +20,7 @@ export const HomePage = () => {
             </Button>
           </Link>
         </div>
-        <div className="text-6xl font-bold leading-10">
+        <div className="text-6xl font-bold">
           Run and save your code snippets.
         </div>
         <div className="text-xl font-light max-w-md">
