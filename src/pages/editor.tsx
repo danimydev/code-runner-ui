@@ -2,6 +2,8 @@ import { useAtom } from "jotai";
 
 import { isExecutingCodeAtom, outputValueAtom } from "@/atoms";
 
+import { getUserAgentName } from "@/lib/utils";
+
 import { EditorControls } from "@/components/editor-controls";
 import { MonacoEditor } from "@/components/monaco-editor";
 import {
@@ -38,7 +40,7 @@ export const EditorPage = () => {
         <ResizablePanel>
           <div className="h-full px-2">
             <code className="text-green-600 dark:text-green-500 text-xs">
-              daniel.madrid@danielmadrid-MacBook-Pro code-runner-api %
+              {getUserAgentName().toLowerCase()}/code-runner %
             </code>
             {!isExecutingCode
               ? (
