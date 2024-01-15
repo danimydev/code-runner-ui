@@ -23,12 +23,12 @@ import {
 export function LanguageSelector() {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useAtom(selectedLanguageAtom);
-  const [languages] = useAtom(languagesAtom);
+  const [{ data }] = useAtom(languagesAtom);
 
-  const formattedLanguages = languages.map((l) => ({
+  const formattedLanguages = data?.map((l) => ({
     value: l.name,
     label: `${l.name.at(0)?.toUpperCase()}${l.name.substring(1)}`,
-  }));
+  })) || [];
 
   return (
     <Popover open={open} onOpenChange={setOpen}>

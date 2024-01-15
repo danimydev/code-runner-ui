@@ -1,9 +1,12 @@
 import { atom } from "jotai";
-import {fetchLanguages} from "@/services/code-runner-api";
+import { atomWithQuery } from "jotai-tanstack-query";
 
-const languages = await fetchLanguages();
+import { fetchLanguages } from "@/services/code-runner-api";
 
-export const languagesAtom = atom(languages);
+export const languagesAtom = atomWithQuery((_get) => ({
+  queryKey: ['languages'],
+  queryFn: async () => await fetchLanguages(),
+}));
 
 export const selectedLanguageAtom = atom("");
 
