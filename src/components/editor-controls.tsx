@@ -14,9 +14,9 @@ import { LanguageSelector } from "@/components/language-selector";
 import { Button } from "@/components/ui/button";
 
 export const EditorControls = () => {
-  const [editorValue] = useAtom(editorValueAtom);
+  const [editorValue, setEditorValue] = useAtom(editorValueAtom);
   const [, setOutputValue] = useAtom(outputValueAtom);
-  const [selectedLanguage] = useAtom(selectedLanguageAtom);
+  const [selectedLanguage, setSelectedLanguage] = useAtom(selectedLanguageAtom);
   const [isExecutingCode, setIsExecutingCode] = useAtom(isExecutingCodeAtom);
 
   const executeCode = async () => {
@@ -29,6 +29,12 @@ export const EditorControls = () => {
     });
     setOutputValue(data.stdout);
     setIsExecutingCode(false);
+  };
+
+  const resetEditor = () => {
+    setEditorValue("");
+    setSelectedLanguage("");
+    setOutputValue("");
   };
 
   return (
@@ -44,8 +50,13 @@ export const EditorControls = () => {
           Run
         </div>
       </Button>
-      <Button variant={"secondary"}>Export</Button>
       <Button variant={"secondary"}>
+        Export
+      </Button>
+      <Button
+        variant={"secondary"}
+        onClick={resetEditor}
+      >
         <RefreshCcw width={16} height={16} />
       </Button>
     </>

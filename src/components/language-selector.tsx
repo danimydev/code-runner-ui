@@ -1,10 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Check, ChevronsUpDown } from "lucide-react";
 import { useAtom } from "jotai";
 
-import { selectedLanguageAtom } from "@/atoms";
-
-import { fetchLanguages } from "@/services/code-runner-api";
+import { languagesAtom, selectedLanguageAtom } from "@/atoms";
 
 import { cn } from "@/lib/utils";
 
@@ -22,27 +20,15 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 
-type Language = {
-  value: string;
-  label: string;
-};
-
 export function LanguageSelector() {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useAtom(selectedLanguageAtom);
-  const [languages, setLanguages] = useState<Language[]>([]);
+  const [languages] = useAtom(languagesAtom);
 
-  useEffect(() => {
-    const loadApiLanguages = async () => {
-      const languages = await fetchLanguages();
-      const formattedLanguages = languages.map((l) => ({
-        value: l.name,
-        label: `${l.name.at(0)?.toUpperCase()}${l.name.substring(1)}`,
-      }));
-      setLanguages(formattedLanguages);
-    };
-    void loadApiLanguages();
-  }, [languages]);
+  const formattedLanguages = languages.map((l) => ({
+    value: l.name,
+    label: `${l.name.at(0)?.toUpperCase()}${l.name.substring(1)}`,
+  }));
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -54,7 +40,8 @@ export function LanguageSelector() {
           className="w-[200px] justify-between"
         >
           {value
-            ? languages.find((language) => language.value === value)?.label
+            ? formattedLanguages.find((language) => language.value === value)
+              ?.label
             : "Select language..."}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
@@ -64,7 +51,7 @@ export function LanguageSelector() {
           <CommandInput placeholder="Search language..." />
           <CommandEmpty>No language found.</CommandEmpty>
           <CommandGroup>
-            {languages.map((language) => (
+            {formattedLanguages.map((language) => (
               <CommandItem
                 key={language.value}
                 value={language.value}
