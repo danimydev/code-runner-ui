@@ -14,9 +14,9 @@ import { LanguageSelector } from "@/components/language-selector";
 import { Button } from "@/components/ui/button";
 
 export const EditorControls = () => {
-  const [editorValue, setEditorValue] = useAtom(editorValueAtom);
+  const [editorValue] = useAtom(editorValueAtom);
   const [, setOutputValue] = useAtom(outputValueAtom);
-  const [selectedLanguage, setSelectedLanguage] = useAtom(selectedLanguageAtom);
+  const [selectedLanguage] = useAtom(selectedLanguageAtom);
   const [isExecutingCode, setIsExecutingCode] = useAtom(isExecutingCodeAtom);
 
   const executeCode = async () => {
@@ -32,9 +32,7 @@ export const EditorControls = () => {
   };
 
   const resetEditor = () => {
-    setEditorValue("");
-    setSelectedLanguage("");
-    setOutputValue("");
+    window.location.reload();
   };
 
   return (
