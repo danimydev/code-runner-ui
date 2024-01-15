@@ -30,7 +30,9 @@ export const MonacoEditor = () => {
         editorRef.current = editor;
       }}
       onChange={(value) => {
-        setEditorValue(value || "");
+        if (value) {
+          setEditorValue(value);
+        }
       }}
       defaultLanguage={selectedLanguage}
       defaultValue={editorValue}
