@@ -29,13 +29,13 @@ export const EditorPage = () => {
         direction="horizontal"
         className="rounded-lg border rounded-tr-none rounded-tl-none border-t-0 py-2 px-6"
       >
-        <ResizablePanel defaultSize={200}>
+        <ResizablePanel>
           <div className="flex h-[500px] items-center justify-center">
             <MonacoEditor />
           </div>
         </ResizablePanel>
         <ResizableHandle withHandle />
-        <ResizablePanel defaultSize={200}>
+        <ResizablePanel>
           <div className="h-full px-2">
             <code className="text-green-600 dark:text-green-500 text-xs">
               daniel.madrid@danielmadrid-MacBook-Pro code-runner-api %
