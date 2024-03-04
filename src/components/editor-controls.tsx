@@ -27,7 +27,11 @@ export const EditorControls = () => {
         language: selectedLanguage,
       },
     });
-    setOutputValue(data.stdout);
+    if (!data.stdout || data.stdout === "") {
+      setOutputValue(data.stderr);
+    } else {
+      setOutputValue(data.stdout);
+    }
     setIsExecutingCode(false);
   };
 
